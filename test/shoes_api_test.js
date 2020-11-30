@@ -10,13 +10,28 @@ let pool = new Pool({
 
 describe("shoesApiFacFun", async function() {
     beforeEach(async function() {
-        // await pool.query(`delete from shifts`);
-        // await pool.query(`delete from waiters`);
+        await pool.query(`delete from cart`);
+        await pool.query(`delete from stock`);
 
 
     })
 
-    it("should be able to", async function() {
+    it("should be able to add new brand to the database", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+        //act
+        let storeShoe = await shoesApiFacFun.newShoe('nike', 'blue', 3, 33);
+        let check = await shoesApiFacFun.verifyEntry('nike', 'blue', 3, 33);
+        // storeInfo;
+
+        //assert
+        assert.equal(1, check)
+
+
+    });
+
+
+    it("should be able to update brand colour in the database", async function() {
         //assemble
         const shoesApiFacFun = ShoesApiFacFun(pool);
 
@@ -27,9 +42,103 @@ describe("shoesApiFacFun", async function() {
 
         //assert
         assert.equal(
-            undefined, shoesTest);
+            "", shoesTest);
 
     });
+    it("should be able to update shoe size in the database", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+    it("should be able to list all shoes in stock", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+
+    it("should be able to list all shoes for a given brand", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+
+
+    it("should be able to list all shoes for a given size", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+
+    it("List all shoes for a given brand and size", async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+
+
+
+    it(`should be able to update shoe stock (As shoes are added to the shopping 
+    basket the stock count should go down. If the basket is cancelled 
+    the shoes should go back in stock`, async function() {
+        //assemble
+        const shoesApiFacFun = ShoesApiFacFun(pool);
+
+        //act
+
+        let shoesTest = await shoesApiFacFun.firstFunction();
+        // storeInfo;
+
+        //assert
+        assert.equal(
+            "", shoesTest);
+
+    });
+
 
     after(async function() {
         await pool.end();
