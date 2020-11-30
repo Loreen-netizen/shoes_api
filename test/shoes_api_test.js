@@ -7,7 +7,6 @@ let pool = new Pool({
     connectionString
 });
 
-
 describe("shoesApiFacFun", async function() {
     beforeEach(async function() {
         await pool.query(`delete from cart`);
