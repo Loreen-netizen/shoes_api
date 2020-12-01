@@ -33,11 +33,12 @@ app.get("/api/shoes", async function(req, res) {
     res.send(data)
 });
 
-let server = async function() {
-    let PORT = process.env.PORT || 3055
-    await app.listen(PORT, function() {
+// let server = async function() {
+let PORT = process.env.PORT || 3000
+    // await
+app.listen(PORT, function() {
         console.log("App starting on port", PORT)
     })
-}
+    // }
 
-module.exports = server;
+// module.exports = server;
