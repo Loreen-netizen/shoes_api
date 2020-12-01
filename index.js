@@ -23,7 +23,7 @@ app.use(session({
 }));
 
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
@@ -33,8 +33,22 @@ app.get("/api/shoes", async function(req, res) {
     res.send(data)
 });
 
+app.get("/api/shoes/brand_name", async function(req, res) {
+    const data = await shoesFacFun.renderApiBrands();
+    res.send(data)
+});
+
+app.get("/api/shoes/color", async function(req, res) {
+    const data = await shoesFacFun.renderApiColor();
+    res.send(data)
+});
+app.get("/api/shoes/size", async function(req, res) {
+    const data = await shoesFacFun.renderApiPrice();
+    res.send(data)
+});
+
 // let server = async function() {
-let PORT = process.env.PORT || 3000
+let PORT = process.env.PORT || 3033
     // await
 app.listen(PORT, function() {
         console.log("App starting on port", PORT)
