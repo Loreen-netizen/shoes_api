@@ -1,6 +1,6 @@
 let express = require("express");
-let handlebars = require("express-handlebars");
 let session = require("express-session");
+let cors = require('cors')
 
 let pg = require("pg");
 let Pool = pg.Pool;
@@ -9,14 +9,12 @@ let pool = new Pool({
     connectionString
 });
 let ShoesFacFun = require("./shoes_factory_function.js");
-let ShoesRoutes = require("./routes.js");
+// let ShoesRoutes = require("./routes.js");
 let shoesFacFun = ShoesFacFun(pool);
 // let shoesRoutes = ShoesRoutes(shoesFacFun);
 let bodyParser = require("body-parser")
 let app = express();
 
-app.engine('handlebars', handlebars({ layoutsDir: "./views/layouts" }));
-app.set('view engine', 'handlebars');
 
 app.use(session({
     secret: 'the expre$$ fl@sh string',
@@ -25,7 +23,7 @@ app.use(session({
 }));
 
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
@@ -35,7 +33,11 @@ app.get("/api/shoes", async function(req, res) {
     res.send(data)
 });
 
-let PORT = process.env.PORT || 3000
-app.listen(PORT, function() {
-    console.log("App starting on port", PORT)
-})
+let server = async function() {
+    let PORT = process.env.PORT || 3055
+    await app.listen(PORT, function() {
+        console.log("App starting on port", PORT)
+    })
+}
+
+module.exports = server;
