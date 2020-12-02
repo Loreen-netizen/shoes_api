@@ -12,27 +12,62 @@ const colorsElem = document.querySelector(".colors");
 const colorsList = document.querySelector(".colorsList");
 const colorsTemplateText = document.querySelector(".colorsTemplateText").innerHTML;
 const colorsTemplate = Handlebars.compile(colorsTemplateText);
+const filterButtonElem = document.querySelector(".filter");
+
+const allShoesElem = document.querySelector(".allShoes");
+const allShoesList = document.querySelector(".allShoesList");
+const allShoesTemplateText = document.querySelector(".allShoesTemplateText").innerHTML;
+const allShoesTemplate = Handlebars.compile(allShoesTemplateText);
+
 
 axios
-    .get("https://shoe-api-yeu.herokuapp.com/api/color")
+    .get("/api/shoes")
     .then(function(results) {
+        let response = results.data;
+        let data = response.data;
+        allShoesList.innerHTML = allShoesTemplate({
+            allShoes: data
+        });
+    });
+
+axios
+    .get("/api/shoes/color")
+    .then(function(results) {
+        let response = results.data;
+        let data = response.data;
         colorsList.innerHTML = colorsTemplate({
-            colors: results.data
+            colors: data
         });
     });
 
 axios
-    .get("http://localhost:3033/api/shoes/brand_name")
+    .get("/api/shoes/brand_name")
     .then(function(results) {
+        let response = results.data;
+        let data = response.data;
         brandsList.innerHTML = brandsTemplate({
-            brands: results.data
+            brands: data
         });
     });
 
 axios
-    .get("https://shoe-api-yeu.herokuapp.com/api/size")
+    .get("/api/shoes/size")
     .then(function(results) {
+        let response = results.data;
+        let data = response.data;
         sizesList.innerHTML = sizesTemplate({
-            sizes: results.data
+            sizes: data
         });
     });
+let sizesFun = function() {
+    axios
+        .get("/api/shoes")
+        .then(function(results) {
+            // sizesList.innerHTML = sizesTemplate({
+            let sizes = results.data;
+            console.log(sizes);
+        }).catch(e => console.log(e))
+}
+
+// });
+filterButtonElem.addEventListener("click", sizesFun)

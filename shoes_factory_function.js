@@ -36,8 +36,20 @@ let shoesApiFacFun = function(pool) {
         console.log(APIquery.rows)
         return APIquery.rows
     }
-    let renderApiPrice = async function() {
+
+    let renderApiSize = async function() {
         let APIquery = await pool.query(`SELECT size FROM brands`)
+        console.log(APIquery.rows)
+        return APIquery.rows
+    }
+
+    let renderApiId = async function() {
+        let APIquery = await pool.query(`SELECT id FROM brands`)
+        console.log(APIquery.rows)
+        return APIquery.rows
+    }
+    let renderApiPrice = async function() {
+        let APIquery = await pool.query(`SELECT unit_price FROM brands`)
         console.log(APIquery.rows)
         return APIquery.rows
     }
@@ -49,7 +61,9 @@ let shoesApiFacFun = function(pool) {
         renderApi,
         renderApiBrands,
         renderApiColor,
-        renderApiPrice
+        renderApiPrice,
+        renderApiId,
+        renderApiSize
     }
 
 }
